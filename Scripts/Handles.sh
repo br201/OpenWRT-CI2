@@ -67,14 +67,14 @@ if [ -f "$NSS_PBUF" ]; then
 fi
 
 #修复TailScale配置文件冲突
-TS_FILE=$(find ../feeds/packages/ -maxdepth 3 -type f -wholename "*/tailscale/Makefile")
-if [ -f "$TS_FILE" ]; then
-	echo " "
+# TS_FILE=$(find ../feeds/packages/ -maxdepth 3 -type f -wholename "*/tailscale/Makefile")
+# if [ -f "$TS_FILE" ]; then
+# 	echo " "
 
-	sed -i '/\/files/d' $TS_FILE
+# 	sed -i '/\/files/d' $TS_FILE
 
-	cd $PKG_PATH && echo "tailscale has been fixed!"
-fi
+# 	cd $PKG_PATH && echo "tailscale has been fixed!"
+# fi
 
 #修复Rust编译失败
 RUST_FILE=$(find ../feeds/packages/ -maxdepth 3 -type f -wholename "*/rust/Makefile")
@@ -87,23 +87,23 @@ if [ -f "$RUST_FILE" ]; then
 fi
 
 #修复DiskMan编译失败
-DM_FILE="./luci-app-diskman/applications/luci-app-diskman/Makefile"
-if [ -f "$DM_FILE" ]; then
-	echo " "
+# DM_FILE="./luci-app-diskman/applications/luci-app-diskman/Makefile"
+# if [ -f "$DM_FILE" ]; then
+# 	echo " "
 
-	sed -i '/ntfs-3g-utils /d' $DM_FILE
+# 	sed -i '/ntfs-3g-utils /d' $DM_FILE
 
-	cd $PKG_PATH && echo "diskman has been fixed!"
-fi
+# 	cd $PKG_PATH && echo "diskman has been fixed!"
+# fi
 
 #修复luci-app-netspeedtest相关问题
-if [ -d *"luci-app-netspeedtest"* ]; then
-	echo " "
+# if [ -d *"luci-app-netspeedtest"* ]; then
+# 	echo " "
 
-	cd ./luci-app-netspeedtest/
+# 	cd ./luci-app-netspeedtest/
 
-	sed -i '$a\exit 0' ./netspeedtest/files/99_netspeedtest.defaults
-	sed -i 's/ca-certificates/ca-bundle/g' ./speedtest-cli/Makefile
+# 	sed -i '$a\exit 0' ./netspeedtest/files/99_netspeedtest.defaults
+# 	sed -i 's/ca-certificates/ca-bundle/g' ./speedtest-cli/Makefile
 
-	cd $PKG_PATH && echo "netspeedtest has been fixed!"
-fi
+# 	cd $PKG_PATH && echo "netspeedtest has been fixed!"
+# fi
